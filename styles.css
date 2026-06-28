@@ -1,0 +1,386 @@
+/* Removes default browser spacing and makes sizing easier to control */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* Apple-style system font */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+/* 
+  CSS variables for the light theme.
+  These make it easy to change colors in one place.
+*/
+:root {
+  --bg-color: #f5f5f7;
+  --text-color: #1d1d1f;
+  --card-color: #ffffff;
+  --muted-text: #6e6e73;
+  --button-color: #0071e3;
+  --button-hover: #005bb5;
+  --shadow: rgba(0, 0, 0, 0.12);
+}
+
+/* 
+  Dark mode variables.
+  These values replace the light theme values when body has the class "dark".
+*/
+body.dark {
+  --bg-color: #000000;
+  --text-color: #f5f5f7;
+  --card-color: #1d1d1f;
+  --muted-text: #b5b5b5;
+  --button-color: #2997ff;
+  --button-hover: #147ce5;
+  --shadow: rgba(255, 255, 255, 0.08);
+}
+
+/* Main page styling */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  /* Smooth color change when switching theme */
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Navigation bar at the top */
+.navbar {
+  height: 70px;
+  padding: 0 50px;
+  background-color: var(--card-color);
+
+  /* Places logo, links, and button in one row */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Adds soft shadow under navbar */
+  box-shadow: 0 3px 20px var(--shadow);
+
+  /* Keeps navbar visible when scrolling */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  transition: background-color 0.4s ease;
+}
+
+/* Logo text */
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Navigation links */
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  margin: 0 15px;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+/* Changes nav link color when hovered */
+nav a:hover {
+  color: var(--button-color);
+}
+
+/* Light/dark mode toggle button */
+#themeToggle {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--button-color);
+  color: white;
+  cursor: pointer;
+
+  /* Smooth hover animation */
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Slightly enlarges the button on hover */
+#themeToggle:hover {
+  transform: scale(1.05);
+  background-color: var(--button-hover);
+}
+
+/* Large intro section */
+.hero {
+  min-height: 420px;
+  text-align: center;
+  padding: 90px 20px;
+
+  /* Light mode gradient background */
+  background: linear-gradient(135deg, #ffffff, #e8f2ff);
+
+  /* Fade animation when page loads */
+  animation: fadeDown 0.8s ease forwards;
+}
+
+/* Dark mode gradient for hero section */
+body.dark .hero {
+  background: linear-gradient(135deg, #111111, #1d1d1f);
+}
+
+/* Small label above hero heading */
+.hero-label {
+  color: var(--button-color);
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Main hero heading */
+.hero h1 {
+  font-size: 3.5rem;
+  max-width: 850px;
+  margin: 0 auto 20px;
+  line-height: 1.1;
+}
+
+/* Hero paragraph */
+.hero-text {
+  color: var(--muted-text);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Hero button */
+.hero-btn {
+  padding: 13px 28px;
+  border: none;
+  border-radius: 25px;
+  background-color: var(--button-color);
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Moves hero button slightly upward on hover */
+.hero-btn:hover {
+  transform: translateY(-3px);
+  background-color: var(--button-hover);
+}
+
+/* Main content wrapper */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 70px 25px;
+  text-align: center;
+}
+
+/* Featured Products title */
+.section-title {
+  font-size: 2.3rem;
+  margin-bottom: 40px;
+}
+
+/* Product card layout */
+.gallery {
+  display: grid;
+
+  /* Creates 3 equal columns */
+  grid-template-columns: repeat(3, 1fr);
+
+  /* Space between cards */
+  gap: 25px;
+}
+
+/* Individual product card */
+.card {
+  position: relative;
+  background-color: var(--card-color);
+  border-radius: 24px;
+  padding: 30px;
+
+  /* Soft card shadow */
+  box-shadow: 0 10px 30px var(--shadow);
+
+  /* Starts invisible before animation */
+  opacity: 0;
+
+  /* Fade-in animation */
+  animation: fadeIn 0.8s ease forwards;
+
+  /* Smooth hover and theme transitions */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.4s ease;
+}
+
+/* Adds delay to first card animation */
+.card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+/* Adds delay to second card animation */
+.card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+/* Adds delay to third card animation */
+.card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* Lifts card when hovered */
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 18px 45px var(--shadow);
+}
+
+/* Product label such as New, Popular, Best Value */
+.badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--button-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+/* Product images */
+.card img {
+  width: 100%;
+  height: 210px;
+
+  /* Crops image nicely without stretching */
+  object-fit: cover;
+
+  border-radius: 18px;
+  margin-bottom: 25px;
+}
+
+/* Product name */
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+/* Product description */
+.card p {
+  color: var(--muted-text);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* Product price */
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Buy button inside each card */
+.card button {
+  padding: 11px 22px;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--button-color);
+  color: white;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Enlarges card button slightly on hover */
+.card button:hover {
+  transform: scale(1.05);
+  background-color: var(--button-hover);
+}
+
+/* Promotional section below the product cards */
+.promo {
+  text-align: center;
+  padding: 70px 20px;
+  background-color: var(--card-color);
+  transition: background-color 0.4s ease;
+}
+
+/* Promo heading */
+.promo h2 {
+  font-size: 2.4rem;
+  margin-bottom: 15px;
+}
+
+/* Promo paragraph */
+.promo p {
+  color: var(--muted-text);
+  font-size: 1.1rem;
+}
+
+/* Footer at bottom of website */
+footer {
+  text-align: center;
+  padding: 25px;
+  color: var(--muted-text);
+}
+
+/* Animation for product cards */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for hero section */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design for tablets and phones */
+@media (max-width: 900px) {
+  /* Changes cards from 3 columns to 1 column */
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  /* Reduces navbar spacing on smaller screens */
+  .navbar {
+    padding: 0 20px;
+  }
+
+  /* Hides navigation links on smaller screens */
+  nav {
+    display: none;
+  }
+
+  /* Reduces hero heading size */
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+
+  /* Reduces section title size */
+  .section-title {
+    font-size: 1.9rem;
+  }
+}
